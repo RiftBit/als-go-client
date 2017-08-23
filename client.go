@@ -34,7 +34,7 @@ func (s *Client) Add(args httpmodels.RequestLogAdd) (httpmodels.ResponseLogAdd, 
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogAdd{}, err
 		} else {
-			return httpmodels.ResponseLogAdd{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogAdd{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogAdd{}, err
 	}
@@ -53,7 +53,7 @@ func (s *Client) AddCustom(args httpmodels.RequestLogAddCustom) (httpmodels.Resp
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogAdd{}, err
 		} else {
-			return httpmodels.ResponseLogAdd{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogAdd{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogAdd{}, err
 	}
@@ -72,7 +72,7 @@ func (s *Client) Get(args httpmodels.RequestLogGetLog) (httpmodels.ResponseLogGe
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogGet{}, err
 		} else {
-			return httpmodels.ResponseLogGet{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogGet{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogGet{}, err
 	}
@@ -91,7 +91,7 @@ func (s *Client) GetCount(args httpmodels.RequestLogGetCount) (httpmodels.Respon
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogGetCount{}, err
 		} else {
-			return httpmodels.ResponseLogGetCount{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogGetCount{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogGetCount{}, err
 	}
@@ -110,7 +110,7 @@ func (s *Client) GetCategories() (httpmodels.ResponseLogGetCategories, error) {
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogGetCategories{}, err
 		} else {
-			return httpmodels.ResponseLogGetCategories{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogGetCategories{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogGetCategories{}, err
 	}
@@ -129,7 +129,7 @@ func (s *Client) Remove(args httpmodels.RequestLogRemoveLog) (httpmodels.Respons
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogRemoveLog{}, err
 		} else {
-			return httpmodels.ResponseLogRemoveLog{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogRemoveLog{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogRemoveLog{}, err
 	}
@@ -148,7 +148,7 @@ func (s *Client) RemoveCategory(args httpmodels.RequestLogRemoveCategory) (httpm
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogRemoveCategory{}, err
 		} else {
-			return httpmodels.ResponseLogRemoveCategory{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogRemoveCategory{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogRemoveCategory{}, err
 	}
@@ -167,7 +167,7 @@ func (s *Client) Transfer(args httpmodels.RequestLogTransferLog) (httpmodels.Res
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogTransferLog{}, err
 		} else {
-			return httpmodels.ResponseLogTransferLog{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogTransferLog{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogTransferLog{}, err
 	}
@@ -186,7 +186,7 @@ func (s *Client) ModifyTTL(args httpmodels.RequestLogModifyTTL) (httpmodels.Resp
 		if err := json.Unmarshal(data, &errAnswer); err != nil {
 			return httpmodels.ResponseLogModifyTTL{}, err
 		} else {
-			return httpmodels.ResponseLogModifyTTL{}, errors.New(errAnswer.Error.Code + " - " + errAnswer.Error.Message)
+			return httpmodels.ResponseLogModifyTTL{}, errors.New(string(errAnswer.Error.Code) + " - " + errAnswer.Error.Message)
 		}
 		return httpmodels.ResponseLogModifyTTL{}, err
 	}

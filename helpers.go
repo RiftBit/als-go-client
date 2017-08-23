@@ -3,9 +3,11 @@ package alsgoclient
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/riftbit/ALS-Go/httpmodels"
@@ -19,7 +21,7 @@ type rpcParams struct {
 }
 
 type rpcError struct {
-	Code    string      `json:"code"`
+	Code    int         `json:"code"`
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
@@ -94,8 +96,16 @@ func sendRequest(url string, login string, password string, timeout int, method 
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
-	} else {
-		body, _ := ioutil.ReadAll(resp.Body)
-		return body, nil
 	}
+	if resp.StatusCode != 200 {
+		return nil, errors.New("Unexpected backend error")
+	}
+	body, _ := ioutil.ReadAll(resp.Body)
+	bodyStr := string(body)
+	if strings.Contains(bodyStr, "error") {
+		var errStruct rpcErrorAnswer
+		_ = json.Unmarshal(body, &errStruct)
+		return body, errors.New(errStruct.Error.Message)
+	}
+	return body, nil
 }
