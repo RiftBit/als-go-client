@@ -1,17 +1,19 @@
 package alsgoclient
 
 import (
-	"github.com/Riftbit/ALS-Go/httpmodels"
 	"encoding/json"
 	"errors"
+
+	"github.com/riftbit/ALS-Go/httpmodels"
 )
 
+//Client client object
 type Client struct {
 	Config
 }
 
 func (s *Client) processRequest(method string, data interface{}) ([]byte, error) {
-	if (s.IsAsync) {
+	if s.IsAsync {
 		go sendRequest(s.Uri, s.Login, s.Password, s.Timeout, method, data)
 		return nil, nil
 	} else {
@@ -23,6 +25,7 @@ func (s *Client) processRequest(method string, data interface{}) ([]byte, error)
 	}
 }
 
+//Add - call Log.Add
 func (s *Client) Add(args httpmodels.RequestLogAdd) (httpmodels.ResponseLogAdd, error) {
 	var resultStruct rLogAdd
 	data, err := s.processRequest("Log.Add", args)
@@ -41,6 +44,7 @@ func (s *Client) Add(args httpmodels.RequestLogAdd) (httpmodels.ResponseLogAdd, 
 	return resultStruct.Result, nil
 }
 
+//AddCustom - call Log.AddCustom
 func (s *Client) AddCustom(args httpmodels.RequestLogAddCustom) (httpmodels.ResponseLogAdd, error) {
 	var resultStruct rLogAdd
 	data, err := s.processRequest("Log.AddCustom", args)
@@ -59,6 +63,7 @@ func (s *Client) AddCustom(args httpmodels.RequestLogAddCustom) (httpmodels.Resp
 	return resultStruct.Result, nil
 }
 
+//Get - call Log.Get
 func (s *Client) Get(args httpmodels.RequestLogGetLog) (httpmodels.ResponseLogGet, error) {
 	var resultStruct rLogGet
 	data, err := s.processRequest("Log.Get", args)
@@ -77,6 +82,7 @@ func (s *Client) Get(args httpmodels.RequestLogGetLog) (httpmodels.ResponseLogGe
 	return resultStruct.Result, nil
 }
 
+//GetCount - call Log.GetCount
 func (s *Client) GetCount(args httpmodels.RequestLogGetCount) (httpmodels.ResponseLogGetCount, error) {
 	var resultStruct rLogGetCount
 	data, err := s.processRequest("Log.GetCount", args)
@@ -95,6 +101,7 @@ func (s *Client) GetCount(args httpmodels.RequestLogGetCount) (httpmodels.Respon
 	return resultStruct.Result, nil
 }
 
+//GetCategories - call Log.GetCategories
 func (s *Client) GetCategories() (httpmodels.ResponseLogGetCategories, error) {
 	var resultStruct rLogGetCategories
 	data, err := s.processRequest("Log.GetCategories", struct{}{})
@@ -113,6 +120,7 @@ func (s *Client) GetCategories() (httpmodels.ResponseLogGetCategories, error) {
 	return resultStruct.Result, nil
 }
 
+//Remove - call Log.Remove
 func (s *Client) Remove(args httpmodels.RequestLogRemoveLog) (httpmodels.ResponseLogRemoveLog, error) {
 	var resultStruct rLogRemoveLog
 	data, err := s.processRequest("Log.Remove", args)
@@ -131,6 +139,7 @@ func (s *Client) Remove(args httpmodels.RequestLogRemoveLog) (httpmodels.Respons
 	return resultStruct.Result, nil
 }
 
+//RemoveCategory - call Log.RemoveCategory
 func (s *Client) RemoveCategory(args httpmodels.RequestLogRemoveCategory) (httpmodels.ResponseLogRemoveCategory, error) {
 	var resultStruct rLogRemoveCategory
 	data, err := s.processRequest("Log.RemoveCategory", args)
@@ -149,6 +158,7 @@ func (s *Client) RemoveCategory(args httpmodels.RequestLogRemoveCategory) (httpm
 	return resultStruct.Result, nil
 }
 
+//Transfer - call Log.Transfer
 func (s *Client) Transfer(args httpmodels.RequestLogTransferLog) (httpmodels.ResponseLogTransferLog, error) {
 	var resultStruct rLogTransferLog
 	data, err := s.processRequest("Log.Transfer", args)
@@ -167,6 +177,7 @@ func (s *Client) Transfer(args httpmodels.RequestLogTransferLog) (httpmodels.Res
 	return resultStruct.Result, nil
 }
 
+//ModifyTTL - call Log.ModifyTTL
 func (s *Client) ModifyTTL(args httpmodels.RequestLogModifyTTL) (httpmodels.ResponseLogModifyTTL, error) {
 	var resultStruct rLogModifyTTL
 	data, err := s.processRequest("Log.ModifyTTL", args)

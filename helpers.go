@@ -1,33 +1,33 @@
 package alsgoclient
 
 import (
-	"net/http"
 	"bytes"
-	"io/ioutil"
-	"time"
 	"encoding/json"
+	"io/ioutil"
 	"math/rand"
-	"github.com/Riftbit/ALS-Go/httpmodels"
+	"net/http"
+	"time"
+
+	"github.com/riftbit/ALS-Go/httpmodels"
 )
 
 type rpcParams struct {
-	Id string `json:"id"`
-	Jsonrpc string `json:"jsonrpc"`
-	Method string `json:"method"`
-	Params interface{} `json:"params"`
+	Id      string      `json:"id"`
+	Jsonrpc string      `json:"jsonrpc"`
+	Method  string      `json:"method"`
+	Params  interface{} `json:"params"`
 }
 
 type rpcError struct {
-	Code string `json:"code"`
-	Message string `json:"message"`
-	Data interface{} `json:"data"`
+	Code    string      `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }
 
 type rpcAnswer struct {
-	Id string `json:"id"`
+	Id      string `json:"id"`
 	Jsonrpc string `json:"jsonrpc"`
 }
-
 
 type rpcErrorAnswer struct {
 	rpcAnswer
@@ -78,14 +78,14 @@ func sendRequest(url string, login string, password string, timeout int, method 
 	client := http.Client{Timeout: time.Duration(time.Duration(timeout) * time.Millisecond)}
 	rand.Seed(time.Now().Unix())
 	toSend := rpcParams{
-		Id: "request_"+string(rand.Intn(9999999)),
+		Id:      "request_" + string(rand.Intn(9999999)),
 		Jsonrpc: "2.0",
-		Method: method,
-		Params: Data,
+		Method:  method,
+		Params:  Data,
 	}
 	jsonedData, err := json.Marshal(toSend)
 	if err != nil {
-		return nil, err;
+		return nil, err
 	}
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonedData))
 	req.Header.Set("Content-Type", "application/json")

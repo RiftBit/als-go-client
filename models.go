@@ -4,12 +4,13 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
+//Config configuration structure
 type Config struct {
-	Uri		string	`validate:"required"`
-	Login		string	`validate:"required"`
-	Password	string	`validate:"required"`
-	IsAsync		bool
-	Timeout		int	`validate:"required,gte=50,lte=60000"`
+	Uri      string `validate:"required"`
+	Login    string `validate:"required"`
+	Password string `validate:"required"`
+	IsAsync  bool
+	Timeout  int `validate:"required,gte=50,lte=60000"`
 }
 
 func (s *Config) validate() (bool, error) {
@@ -20,4 +21,3 @@ func (s *Config) validate() (bool, error) {
 	}
 	return true, nil
 }
-
