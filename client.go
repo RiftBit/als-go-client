@@ -18,9 +18,6 @@ func (s *Client) processRequest(method string, data interface{}) ([]byte, error)
 		return nil, nil
 	} else {
 		data, err := sendRequest(s.Uri, s.Login, s.Password, s.Timeout, method, data)
-		if err != nil {
-			return nil, err
-		}
 		return data, err
 	}
 }
