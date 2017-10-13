@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/riftbit/ALS-Go/httpmodels"
@@ -101,10 +100,13 @@ func sendRequest(url string, login string, password string, timeout int, method 
 		return nil, errors.New("Unexpected backend error")
 	}
 	body, _ := ioutil.ReadAll(resp.Body)
-	bodyStr := string(body)
-	if strings.Contains(bodyStr, "error") {
-		var errStruct rpcErrorAnswer
-		_ = json.Unmarshal(body, &errStruct)
+
+	var errStruct rpcErrorAnswer
+	err = json.Unmarshal(body, &errStruct)
+	if err != nil {
+		return body, errors.New(err.Error())
+	}
+	if errStruct.Error.Code != 0 {
 		return body, errors.New(errStruct.Error.Message)
 	}
 	return body, nil
