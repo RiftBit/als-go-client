@@ -9,7 +9,7 @@
 
 ## Example
 
-```
+```golang
 package main
 
 import (
